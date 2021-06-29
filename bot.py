@@ -19,14 +19,27 @@ soup_current_all = BS(current_alls.content,'html.parser')
 
 # Финальный Парсинг 
 conver_soup_dollars = soup_current_all.find_all("span",{"class":"conv-val triger-usd"})
-conver_soup_dollars_sell = soup_current_all.find_all("span",{"class":"conv-val triger-usd"})
+conver_soup_euro = soup_current_all.find_all("span",{"class":"conv-val triger-eur"})
+conver_soup_pl = soup_current_all.find_all("span",{"class":"conv-val triger-pln"})
 # Для удобства 
-
+# Переменный доллар 
 USD_BUY = conver_soup_dollars[0].text
 USD_SELL = conver_soup_dollars[1].text
 USD_NEXT_DAY = conver_soup_dollars[3].text
+# Переменные Евро 
+EURO_BUY = conver_soup_euro[0].text
+EURO_SELL = conver_soup_euro[1].text
+EURO_NEXT_DAY = conver_soup_euro[3].text
+# Переменные PLN
+PL_BUY = conver_soup_pl[0].text
+PL_SELL = conver_soup_pl[1].text
+PL_NEXT_DAY = conver_soup_pl[3].text
 
+
+
+print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)
 print(USD_BUY,USD_SELL,USD_NEXT_DAY)
+print(PL_BUY,PL_SELL,PL_NEXT_DAY)
 
 # Начало 
 bot = telebot.TeleBot(config.token)
@@ -48,7 +61,7 @@ def answer(call):
         markup_inline_step_2 =types.InlineKeyboardMarkup()
         btn_inline_1_step_2 = types.InlineKeyboardButton(text="🇺🇸 Доллар ",callback_data = 'dollars')
         btn_inline_2_step_2 = types.InlineKeyboardButton(text="🇪🇺 Евро",callback_data = 'euro')
-        btn_inline_3_step_2 = types.InlineKeyboardButton(text="🇵🇱 Злоты",callback_data = 'zlt')
+        btn_inline_3_step_2 = types.InlineKeyboardButton(text="🇵🇱 PL",callback_data = 'pln')
         markup_inline_step_2.add(btn_inline_1_step_2,btn_inline_2_step_2,btn_inline_3_step_2)
         msg = bot.send_message(call.message.chat.id," Выберете на клавиатуре что хотите узнать  ",reply_markup = markup_inline_step_2)
     
@@ -58,11 +71,12 @@ def answer(call):
 
     # Вывод euro Шаг 3 
     elif call.data =='euro':
-        bot.send_message(call.message.chat.id,"Привет евро ")
+        bot.send_message(call.message.chat.id,"🇪🇺 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} ".format(EURO_BUY,EURO_SELL,EURO_NEXT_DAY ))
+
 
     # Вывод злоты Шаг 3 
-    elif call.data =='zlt':
-        bot.send_message(call.message.chat.id,"Привет злоты   ",'''reply_markup=markup_reply''')
+    elif call.data =='pln':
+        bot.send_message(call.message.chat.id,"🇵🇱 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} ".format(PL_BUY,PL_SELL,PL_NEXT_DAY ))
 
     # Что то другое Шаг 3 
     else:

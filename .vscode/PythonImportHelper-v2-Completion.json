@@ -74,7 +74,7 @@
         "kind": 2,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "def answer(call):\n    if call.data== 'current':\n        # Вывод клавиатуры Шаг 2 \n        markup_inline_step_2 =types.InlineKeyboardMarkup()\n        btn_inline_1_step_2 = types.InlineKeyboardButton(text=\"🇺🇸 Доллар \",callback_data = 'dollars')\n        btn_inline_2_step_2 = types.InlineKeyboardButton(text=\"🇪🇺 Евро\",callback_data = 'euro')\n        btn_inline_3_step_2 = types.InlineKeyboardButton(text=\"🇵🇱 Злоты\",callback_data = 'zlt')\n        markup_inline_step_2.add(btn_inline_1_step_2,btn_inline_2_step_2,btn_inline_3_step_2)\n        msg = bot.send_message(call.message.chat.id,\" Выберете на клавиатуре что хотите узнать  \",reply_markup = markup_inline_step_2)\n    # Вывод dollars Шаг 3 ",
+        "peekOfCode": "def answer(call):\n    if call.data== 'current':\n        # Вывод клавиатуры Шаг 2 \n        markup_inline_step_2 =types.InlineKeyboardMarkup()\n        btn_inline_1_step_2 = types.InlineKeyboardButton(text=\"🇺🇸 Доллар \",callback_data = 'dollars')\n        btn_inline_2_step_2 = types.InlineKeyboardButton(text=\"🇪🇺 Евро\",callback_data = 'euro')\n        btn_inline_3_step_2 = types.InlineKeyboardButton(text=\"🇵🇱 PL\",callback_data = 'pln')\n        markup_inline_step_2.add(btn_inline_1_step_2,btn_inline_2_step_2,btn_inline_3_step_2)\n        msg = bot.send_message(call.message.chat.id,\" Выберете на клавиатуре что хотите узнать  \",reply_markup = markup_inline_step_2)\n    # Вывод dollars Шаг 3 ",
         "detail": "bot",
         "documentation": {}
     },
@@ -92,7 +92,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства ",
+        "peekOfCode": "headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})",
         "detail": "bot",
         "documentation": {}
     },
@@ -101,7 +101,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "current_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text",
+        "peekOfCode": "current_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\n# Для удобства \n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -110,7 +110,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "soup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало ",
+        "peekOfCode": "soup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\n# Для удобства \n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -119,16 +119,25 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])",
+        "peekOfCode": "conver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\n# Для удобства \n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text",
         "detail": "bot",
         "documentation": {}
     },
     {
-        "label": "conver_soup_dollars_sell",
+        "label": "conver_soup_euro",
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):",
+        "peekOfCode": "conver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\n# Для удобства \n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_pl",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\n# Для удобства \n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -137,7 +146,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()",
+        "peekOfCode": "USD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -146,7 +155,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')",
+        "peekOfCode": "USD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -155,7 +164,61 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')",
+        "peekOfCode": "USD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "EURO_BUY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "EURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "EURO_SELL",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "EURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "EURO_NEXT_DAY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "EURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "PL_BUY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "PL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "PL_SELL",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "PL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "PL_NEXT_DAY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "PL_NEXT_DAY = conver_soup_pl[3].text\nprint(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\nprint(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()",
         "detail": "bot",
         "documentation": {}
     },
