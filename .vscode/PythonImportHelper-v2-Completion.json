@@ -1,0 +1,180 @@
+[
+    {
+        "label": "config",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "config",
+        "description": "config",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "telebot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "telebot",
+        "description": "telebot",
+        "detail": "telebot",
+        "documentation": {}
+    },
+    {
+        "label": "types",
+        "importPath": "telebot",
+        "description": "telebot",
+        "isExtraImport": true,
+        "detail": "telebot",
+        "documentation": {}
+    },
+    {
+        "label": "emoji",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "emoji",
+        "description": "emoji",
+        "detail": "emoji",
+        "documentation": {}
+    },
+    {
+        "label": "get_user_info",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')\n    btn_inline_3 = types.InlineKeyboardButton(text=\"Курс Биржы \",callback_data = 'no')\n    markup_inline.add(btn_inline_1,btn_inline_2)\n    bot.send_message(message.chat.id, \"Привет👋🏻 я бот , показываю лучший курс валюты в Калининграде \\n  Курс ЦБ \\n  Курс Биржа \\n  \" ,reply_markup = markup_inline)\n@bot.callback_query_handler(func=lambda call:True)\ndef answer(call):",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "answer",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def answer(call):\n    if call.data== 'current':\n        # Вывод клавиатуры Шаг 2 \n        markup_inline_step_2 =types.InlineKeyboardMarkup()\n        btn_inline_1_step_2 = types.InlineKeyboardButton(text=\"🇺🇸 Доллар \",callback_data = 'dollars')\n        btn_inline_2_step_2 = types.InlineKeyboardButton(text=\"🇪🇺 Евро\",callback_data = 'euro')\n        btn_inline_3_step_2 = types.InlineKeyboardButton(text=\"🇵🇱 Злоты\",callback_data = 'zlt')\n        markup_inline_step_2.add(btn_inline_1_step_2,btn_inline_2_step_2,btn_inline_3_step_2)\n        msg = bot.send_message(call.message.chat.id,\" Выберете на клавиатуре что хотите узнать  \",reply_markup = markup_inline_step_2)\n    # Вывод dollars Шаг 3 ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "Main",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "Main = \"https://kaliningrad.bankiros.ru/currency\"    \n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "headers",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "current_alls",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "current_alls = requests.get(Main ,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "soup_current_all",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "soup_current_all = BS(current_alls.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_dollars",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_dollars_sell",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_dollars_sell = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\n# Для удобства \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "USD_BUY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "USD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "USD_SELL",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "USD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "USD_NEXT_DAY",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "USD_NEXT_DAY = conver_soup_dollars[3].text\nprint(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "bot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс для обмена валюты \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')\n    btn_inline_3 = types.InlineKeyboardButton(text=\"Курс Биржы \",callback_data = 'no')\n    markup_inline.add(btn_inline_1,btn_inline_2)\n    bot.send_message(message.chat.id, \"Привет👋🏻 я бот , показываю лучший курс валюты в Калининграде \\n  Курс ЦБ \\n  Курс Биржа \\n  \" ,reply_markup = markup_inline)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "token",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "token = \"1897308862:AAHeH3YDqHWCbzT2uiddyLr_nijioi-bSfQ\"",
+        "detail": "config",
+        "documentation": {}
+    }
+]
