@@ -7,23 +7,26 @@ import emoji #Смайлики
 from telebot import types
 
 # Парсер 
-Main = "https://kaliningrad.bankiros.ru/currency"    
+Main = "https://kaliningrad.bankiros.ru/currency"
+MAin_CB = "https://bankiros.ru/currency/cbrf"
     # Заголовки для передачи вместе с URL
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}
 #######
 # Ищем доллар покупка 
 current_alls = requests.get(Main ,headers=headers)
+current_CB = requests.get(MAin_CB,headers=headers)
 ####################
 soup_current_all = BS(current_alls.content,'html.parser')
-
+soup_current_CB = BS(current_CB.content,'html.parser')
 
 # Финальный Парсинг 
 conver_soup_dollars = soup_current_all.find_all("span",{"class":"conv-val triger-usd"})
 conver_soup_euro = soup_current_all.find_all("span",{"class":"conv-val triger-eur"})
 conver_soup_pl = soup_current_all.find_all("span",{"class":"conv-val triger-pln"})
 conver_soup_time = soup_current_all.find_all("div",{"class":"actual-currency"})
+conver_soup_dollars_CB = soup_current_CB.find_all("tr",{"class":"currency" })
 # Для удобства 
-
+print(conver_soup_dollars_CB[2].text)
 # Переменный доллар 
 USD_BUY = conver_soup_dollars[0].text
 USD_SELL = conver_soup_dollars[1].text
@@ -47,7 +50,7 @@ actual_time = conver_soup_time[0].text
 
 # Начало 
 bot = telebot.TeleBot(config.token)
-@bot.message_handler(commands=['start'],content_types=["text", "sticker", "pinned_message", "photo", "audio"])
+@bot.message_handler(commands=['start'])
 def get_user_info(message):
     # Вывод клавиатуры Шаг 1 
     markup_inline =types.InlineKeyboardMarkup()
@@ -55,8 +58,8 @@ def get_user_info(message):
     btn_inline_2 = types.InlineKeyboardButton(text="Курс ЦБ",callback_data = 'cbank')
     btn_inline_3 = types.InlineKeyboardButton(text="Курс Биржы ",callback_data = 'no')
     btn_inline_4 = types.InlineKeyboardButton(text=" Кнопка ",callback_data = 'help')
-    markup_inline.add(btn_inline_1,btn_inline_2)
-    bot.send_message(message.chat.id, "Привет👋🏻 друзья , я бот \n \n Умею показывать  лучший курс валюты в Калининграде в отделениях банков \n \n  Курс по Центральному банку \n \n  Курс Московской биржы  \n Для повторного запуска используете комманду /start или напишите в чат /start " ,reply_markup = markup_inline)
+    markup_inline.add(btn_inline_1,btn_inline_2,btn_inline_3,btn_inline_4)
+    bot.send_message(message.chat.id, "Привет👋🏻" + message.from_user.first_name + " я бот \n \n Умею показывать  лучший курс валюты в Калининграде в отделениях банков \n \n  Курс по Центральному банку \n \n  Курс Московской биржы  \n \n \n  Для повторного запуска используете комманду /start или напишите в чат /start " ,reply_markup = markup_inline)
         
 
 @bot.callback_query_handler(func=lambda call:True)
@@ -72,16 +75,16 @@ def answer(call):
     
     # Вывод dollars Шаг 3 
     elif call.data =='dollars':
-        bot.send_message(call.message.chat.id,"🇺🇸 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновление информации {3} ".format(USD_BUY,USD_SELL,USD_NEXT_DAY,actual_time ))
+        bot.send_message(call.message.chat.id,"🇺🇸 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновления {3} ".format(USD_BUY,USD_SELL,USD_NEXT_DAY,actual_time ))
 
     # Вывод euro Шаг 3 
     elif call.data =='euro':
-        bot.send_message(call.message.chat.id,"🇪🇺 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновление информации {3} ".format(EURO_BUY,EURO_SELL,EURO_NEXT_DAY,actual_time ))
+        bot.send_message(call.message.chat.id,"🇪🇺 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновления  {3} ".format(EURO_BUY,EURO_SELL,EURO_NEXT_DAY,actual_time ))
 
 
     # Вывод злоты Шаг 3 
     elif call.data =='pln':
-        bot.send_message(call.message.chat.id,"🇵🇱 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновление информации {3} ".format(PL_BUY,PL_SELL,PL_NEXT_DAY,actual_time ))
+        bot.send_message(call.message.chat.id,"🇵🇱 Покупка|Продажа \n \n ✅  {0}  |  {1} \n \n 🏞  Курс на след день {2} \n \n Время обновления  {3} ".format(PL_BUY,PL_SELL,PL_NEXT_DAY,actual_time ))
 
     # Что то другое Шаг 3
     else:
