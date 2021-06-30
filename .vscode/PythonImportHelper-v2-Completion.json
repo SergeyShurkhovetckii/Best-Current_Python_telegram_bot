@@ -61,11 +61,20 @@
         "documentation": {}
     },
     {
+        "label": "actio",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0].text)\naction()\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
         "label": "get_user_info",
         "kind": 2,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "def get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс в обменниках \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')\n    btn_inline_3 = types.InlineKeyboardButton(text=\"Курс Биржы \",callback_data = 'no')\n    btn_inline_4 = types.InlineKeyboardButton(text=\" Кнопка \",callback_data = 'help')\n    markup_inline.add(btn_inline_1,btn_inline_2,btn_inline_3,btn_inline_4)\n    bot.send_message(message.chat.id, \"Привет👋🏻\" + message.from_user.first_name + \" я бот \\n \\n Умею показывать  лучший курс валюты в Калининграде в отделениях банков \\n \\n  Курс по Центральному банку \\n \\n  Курс Московской биржы  \\n \\n \\n  Для повторного запуска используете комманду /start или напишите в чат /start \" ,reply_markup = markup_inline)\n@bot.callback_query_handler(func=lambda call:True)",
+        "peekOfCode": "def get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup(row_width=1)\n    btn_inline_1 = types.InlineKeyboardButton(text=\" Начать \",callback_data = 'current')\n    markup_inline.add(btn_inline_1)\n    bot.send_message(message.chat.id, \"Привет👋🏻\" + message.from_user.first_name + \" я бот \\n \\n Моя задача  показывать лучший курс валюты в Калининграде. \\n \\n Курс валюты по Центральному банку \\n \\n  Курс валюты  Московской биржы  \\n \\n \\n  Для повторного запуска используете комманду /start или напишите в чат /start \" ,reply_markup = markup_inline)\n@bot.callback_query_handler(func=lambda call:True)\ndef answer(call):\n    if call.data== 'current':\n    # Вывод клавиатуры Шаг 1",
         "detail": "bot",
         "documentation": {}
     },
@@ -74,7 +83,16 @@
         "kind": 2,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "def answer(call):\n    if call.data== 'current':\n        # Вывод клавиатуры Шаг 2 \n        markup_inline_step_2 =types.InlineKeyboardMarkup()\n        btn_inline_1_step_2 = types.InlineKeyboardButton(text=\"🇺🇸 Доллар \",callback_data = 'dollars')\n        btn_inline_2_step_2 = types.InlineKeyboardButton(text=\"🇪🇺 Евро\",callback_data = 'euro')\n        btn_inline_3_step_2 = types.InlineKeyboardButton(text=\"🇵🇱 PL\",callback_data = 'pln')\n        markup_inline_step_2.add(btn_inline_1_step_2,btn_inline_2_step_2,btn_inline_3_step_2)\n        msg = bot.send_message(call.message.chat.id,\" Выберете на клавиатуре что вас интересует  \",reply_markup = markup_inline_step_2)\n    # Вывод dollars Шаг 3 ",
+        "peekOfCode": "def answer(call):\n    if call.data== 'current':\n    # Вывод клавиатуры Шаг 1\n        markup_inline_step_2 =types.InlineKeyboardMarkup(row_width=3)\n        btn_inline_6_step_2 = types.InlineKeyboardButton(text=\"Обмена\",callback_data = 'BB')\n        btn_inline_4_step_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cb')\n        btn_inline_5_step_2 = types.InlineKeyboardButton(text=\"Курс Биржы\",callback_data = 'tr')\n        markup_inline_step_2.add(btn_inline_4_step_2,btn_inline_5_step_2,btn_inline_6_step_2)\n        msg = bot.send_message(call.message.chat.id,\"✅Пожалуйста выберете раздел\",reply_markup = markup_inline_step_2)\n    # Вывод клавиатуры Шаг 2",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "get_user_help",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def get_user_help(message):\n    bot.send_message(message.chat.id, \"Привет👋🏻\" + message.from_user.first_name + \" мой создатель @S19S93 , вся информация была взята https://kaliningrad.bankiros.ru/ \")\nbot.polling(none_stop=True)",
         "detail": "bot",
         "documentation": {}
     },
@@ -83,7 +101,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "Main = \"https://kaliningrad.bankiros.ru/currency\"\nMAin_CB = \"https://bankiros.ru/currency/cbrf\"\n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')",
+        "peekOfCode": "Main = \"https://kaliningrad.bankiros.ru/currency\"\nMAin_CB = \"https://bankiros.ru/currency/cbrf\"\nMain_Moex =\"https://bankiros.ru/currency/moex/usdrub-tod\"\nMain_Moex_euro = \"https://bankiros.ru/currency/moex/eurrub-tod\"\n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)",
         "detail": "bot",
         "documentation": {}
     },
@@ -92,7 +110,16 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "MAin_CB = \"https://bankiros.ru/currency/cbrf\"\n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')",
+        "peekOfCode": "MAin_CB = \"https://bankiros.ru/currency/cbrf\"\nMain_Moex =\"https://bankiros.ru/currency/moex/usdrub-tod\"\nMain_Moex_euro = \"https://bankiros.ru/currency/moex/eurrub-tod\"\n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\ncurrent_moex_USD = requests.get(Main_Moex,headers=headers) ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "Main_Moex_euro",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "Main_Moex_euro = \"https://bankiros.ru/currency/moex/eurrub-tod\"\n    # Заголовки для передачи вместе с URL\nheaders = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\ncurrent_moex_USD = requests.get(Main_Moex,headers=headers) \ncurrent_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################",
         "detail": "bot",
         "documentation": {}
     },
@@ -101,7 +128,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})",
+        "peekOfCode": "headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}\n#######\n# Ищем доллар покупка \ncurrent_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\ncurrent_moex_USD = requests.get(Main_Moex,headers=headers) \ncurrent_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')",
         "detail": "bot",
         "documentation": {}
     },
@@ -110,7 +137,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "current_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})",
+        "peekOfCode": "current_alls = requests.get(Main ,headers=headers)\ncurrent_CB = requests.get(MAin_CB,headers=headers)\ncurrent_moex_USD = requests.get(Main_Moex,headers=headers) \ncurrent_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг ",
         "detail": "bot",
         "documentation": {}
     },
@@ -119,7 +146,25 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "current_CB = requests.get(MAin_CB,headers=headers)\n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })",
+        "peekOfCode": "current_CB = requests.get(MAin_CB,headers=headers)\ncurrent_moex_USD = requests.get(Main_Moex,headers=headers) \ncurrent_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "current_moex_USD",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "current_moex_USD = requests.get(Main_Moex,headers=headers) \ncurrent_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "current_moex_EURO",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "current_moex_EURO = requests.get(Main_Moex_euro,headers=headers) \n####################\nsoup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})",
         "detail": "bot",
         "documentation": {}
     },
@@ -128,7 +173,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "soup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)",
+        "peekOfCode": "soup_current_all = BS(current_alls.content,'html.parser')\nsoup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})",
         "detail": "bot",
         "documentation": {}
     },
@@ -137,7 +182,25 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "soup_current_CB = BS(current_CB.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар ",
+        "peekOfCode": "soup_current_CB = BS(current_CB.content,'html.parser')\nsoup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "soup_current_moex_usd",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "soup_current_moex_usd = BS(current_moex_USD.content,'html.parser')\nsoup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "soup_current_moex_euro",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "soup_current_moex_euro = BS(current_moex_EURO.content,'html.parser')\n# Финальный Парсинг \nconver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})",
         "detail": "bot",
         "documentation": {}
     },
@@ -146,7 +209,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text",
+        "peekOfCode": "conver_soup_dollars = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-usd\"})\nconver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):",
         "detail": "bot",
         "documentation": {}
     },
@@ -155,7 +218,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text",
+        "peekOfCode": "conver_soup_euro = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-eur\"})\nconver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)",
         "detail": "bot",
         "documentation": {}
     },
@@ -164,7 +227,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро ",
+        "peekOfCode": "conver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})",
         "detail": "bot",
         "documentation": {}
     },
@@ -173,16 +236,52 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text",
+        "peekOfCode": "conver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():",
         "detail": "bot",
         "documentation": {}
     },
     {
-        "label": "conver_soup_dollars_CB",
+        "label": "conver_soup_moex_usd",
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_dollars_CB = soup_current_CB.find_all(\"tr\",{\"class\":\"currency\" })\n# Для удобства \nprint(conver_soup_dollars_CB[2].text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text",
+        "peekOfCode": "conver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_moex_usd_time",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_moex_euro",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "conver_soup_moex_euro_time",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "conver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "bank_name",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "bank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0].text)\naction()\n# Переменный доллар ",
         "detail": "bot",
         "documentation": {}
     },
@@ -191,7 +290,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text",
+        "peekOfCode": "USD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_CB = conver_soup_dollars[2].text\nUSD_TR = conver_soup_moex_usd[0].text\nUSD_TR_time = conver_soup_moex_usd_time[0].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -200,16 +299,34 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_SELL = conver_soup_dollars[1].text\nUSD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text",
+        "peekOfCode": "USD_SELL = conver_soup_dollars[1].text\nUSD_CB = conver_soup_dollars[2].text\nUSD_TR = conver_soup_moex_usd[0].text\nUSD_TR_time = conver_soup_moex_usd_time[0].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text",
         "detail": "bot",
         "documentation": {}
     },
     {
-        "label": "USD_NEXT_DAY",
+        "label": "USD_CB",
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "USD_NEXT_DAY = conver_soup_dollars[3].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее",
+        "peekOfCode": "USD_CB = conver_soup_dollars[2].text\nUSD_TR = conver_soup_moex_usd[0].text\nUSD_TR_time = conver_soup_moex_usd_time[0].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "USD_TR",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "USD_TR = conver_soup_moex_usd[0].text\nUSD_TR_time = conver_soup_moex_usd_time[0].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "USD_TR_time",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "USD_TR_time = conver_soup_moex_usd_time[0].text\n# Переменные Евро \nEURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -218,7 +335,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "EURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)",
+        "peekOfCode": "EURO_BUY = conver_soup_euro[0].text\nEURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -227,16 +344,34 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "EURO_SELL = conver_soup_euro[1].text\nEURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)",
+        "peekOfCode": "EURO_SELL = conver_soup_euro[1].text\nEURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################",
         "detail": "bot",
         "documentation": {}
     },
     {
-        "label": "EURO_NEXT_DAY",
+        "label": "EURO_CB",
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "EURO_NEXT_DAY = conver_soup_euro[3].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# print(PL_BUY,PL_SELL,PL_NEXT_DAY)",
+        "peekOfCode": "EURO_CB = conver_soup_euro[2].text\nEURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################\n    # Начало ",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "EURO_TR",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "EURO_TR = conver_soup_moex_euro[0].text\nEURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################\n    # Начало \nbot = telebot.TeleBot(config.token)",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "EURO_TR_time",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "EURO_TR_time = conver_soup_moex_euro_time[0].text\n# Переменные PLN\nPL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################\n    # Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])",
         "detail": "bot",
         "documentation": {}
     },
@@ -245,7 +380,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "PL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# print(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)",
+        "peekOfCode": "PL_BUY = conver_soup_pl[0].text\nPL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################\n    # Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 ",
         "detail": "bot",
         "documentation": {}
     },
@@ -254,16 +389,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "PL_SELL = conver_soup_pl[1].text\nPL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# print(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])",
-        "detail": "bot",
-        "documentation": {}
-    },
-    {
-        "label": "PL_NEXT_DAY",
-        "kind": 5,
-        "importPath": "bot",
-        "description": "bot",
-        "peekOfCode": "PL_NEXT_DAY = conver_soup_pl[3].text\n# Прочее\nactual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# print(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):",
+        "peekOfCode": "PL_SELL = conver_soup_pl[1].text\n# Прочее\nactual_time = conver_soup_time[0].text\n#########################################\n    # Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup(row_width=1)",
         "detail": "bot",
         "documentation": {}
     },
@@ -272,7 +398,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "actual_time = conver_soup_time[0].text\n# print(EURO_BUY,EURO_SELL,EURO_NEXT_DAY)\n# print(USD_BUY,USD_SELL,USD_NEXT_DAY)\n# print(PL_BUY,PL_SELL,PL_NEXT_DAY)\n# Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()",
+        "peekOfCode": "actual_time = conver_soup_time[0].text\n#########################################\n    # Начало \nbot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup(row_width=1)\n    btn_inline_1 = types.InlineKeyboardButton(text=\" Начать \",callback_data = 'current')\n    markup_inline.add(btn_inline_1)",
         "detail": "bot",
         "documentation": {}
     },
@@ -281,7 +407,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "bot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup()\n    btn_inline_1 = types.InlineKeyboardButton(text=\"✅Лучший курс в обменниках \",callback_data = 'current')\n    btn_inline_2 = types.InlineKeyboardButton(text=\"Курс ЦБ\",callback_data = 'cbank')\n    btn_inline_3 = types.InlineKeyboardButton(text=\"Курс Биржы \",callback_data = 'no')\n    btn_inline_4 = types.InlineKeyboardButton(text=\" Кнопка \",callback_data = 'help')\n    markup_inline.add(btn_inline_1,btn_inline_2,btn_inline_3,btn_inline_4)",
+        "peekOfCode": "bot = telebot.TeleBot(config.token)\n@bot.message_handler(commands=['start'])\ndef get_user_info(message):\n    # Вывод клавиатуры Шаг 1 \n    markup_inline =types.InlineKeyboardMarkup(row_width=1)\n    btn_inline_1 = types.InlineKeyboardButton(text=\" Начать \",callback_data = 'current')\n    markup_inline.add(btn_inline_1)\n    bot.send_message(message.chat.id, \"Привет👋🏻\" + message.from_user.first_name + \" я бот \\n \\n Моя задача  показывать лучший курс валюты в Калининграде. \\n \\n Курс валюты по Центральному банку \\n \\n  Курс валюты  Московской биржы  \\n \\n \\n  Для повторного запуска используете комманду /start или напишите в чат /start \" ,reply_markup = markup_inline)\n@bot.callback_query_handler(func=lambda call:True)\ndef answer(call):",
         "detail": "bot",
         "documentation": {}
     },
