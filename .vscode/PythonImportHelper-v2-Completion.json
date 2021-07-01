@@ -65,7 +65,7 @@
         "kind": 2,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "def action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0].text)\naction()\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
+        "peekOfCode": "def action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0])\naction()\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -281,7 +281,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "bank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0].text)\naction()\n# Переменный доллар ",
+        "peekOfCode": "bank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0])\naction()\n# Переменный доллар ",
         "detail": "bot",
         "documentation": {}
     },

@@ -45,7 +45,7 @@ def action ():
         # list = i
         # print(i.text)
         list.append(i)
-        print(list[0].text)
+        print(list[0])
 
 
 action()
