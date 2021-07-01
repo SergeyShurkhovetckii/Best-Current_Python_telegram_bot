@@ -39,7 +39,6 @@ conver_soup_moex_euro_time = soup_current_moex_euro.find_all("span",{"class":"xx
 # for i in bank_name.find_all('a'):
 #     print(i.text)
 
-
 # Переменный доллар 
 USD_BUY = conver_soup_dollars[0].text
 USD_SELL = conver_soup_dollars[1].text
@@ -89,16 +88,16 @@ def answer(call):
         bot.send_message(call.message.chat.id," \n \n ✅Узнать самый выгодный курс в пунтках обмена",reply_markup = markup_inline_step_21)
     # Вывод dollars Шаг 3 
     elif call.data =='dollars':
-        bot.send_message(call.message.chat.id,"🇺🇸 Покупка|Продажа \n  \n☑️  {0}  |  {1} \n \n \n Время обновления {2} ".format(USD_BUY,USD_SELL,actual_time ))
+        bot.send_message(call.message.chat.id,"🇺🇸 Покупка|Продажа \n  \n☑️  {0}  |  {1} \n \n \n Время обновления МСК {2} ".format(USD_BUY,USD_SELL,actual_time ))
 
     # Вывод euro Шаг 3 
     elif call.data =='euro':
-        bot.send_message(call.message.chat.id,"🇪🇺 Покупка|Продажа \n  \n ☑️  {0}  |  {1} \n \n \n Время обновления  {2} ".format(EURO_BUY,EURO_SELL,actual_time ))
+        bot.send_message(call.message.chat.id,"🇪🇺 Покупка|Продажа \n  \n ☑️  {0}  |  {1} \n \n \n Время обновления МСК {2} ".format(EURO_BUY,EURO_SELL,actual_time ))
 
 
     # Вывод злоты Шаг 3 
     elif call.data =='pln':
-        bot.send_message(call.message.chat.id,"🇵🇱 Покупка|Продажа \n  \n ☑️  {0}  |  {1} \n \n \n Время обновления  {2} ".format(PL_BUY,PL_SELL,actual_time ))
+        bot.send_message(call.message.chat.id,"🇵🇱 Покупка|Продажа \n  \n ☑️  {0}  |  {1} \n \n \n Время обновления МСК  {2} ".format(PL_BUY,PL_SELL,actual_time ))
 
     # Что то другое Шаг 4 
     if call.data =='cb':
@@ -123,10 +122,10 @@ def answer(call):
         bot.send_message(call.message.chat.id,"\n \n ✅ Узнать курс  Московской Биржы ",reply_markup = markup_inline_step_4)
     # Вывод dollars Шаг 5.1  
     elif call.data =='dollars_tr':
-        bot.send_message(call.message.chat.id,'\n \n'"🇺🇸 {0} \n \n Обновлено {1} ".format(USD_TR,USD_TR_time))
+        bot.send_message(call.message.chat.id,'\n \n'"🇺🇸 {0} \n \n Время обновления МСК {1} ".format(USD_TR,USD_TR_time))
     # Вывод euro Шаг 5.2   
     elif call.data == 'euro_tr':
-        bot.send_message(call.message.chat.id,'\n \n'"🇪🇺 {0} \n \n Обновлено {1} ".format(EURO_TR,EURO_TR_time))
+        bot.send_message(call.message.chat.id,'\n \n'"🇪🇺 {0} \n \n Время обновления МСК {1} ".format(EURO_TR,EURO_TR_time))
 
 
 @bot.message_handler(commands=['help'])
