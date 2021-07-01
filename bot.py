@@ -5,6 +5,7 @@ import time # Модуль для остановки программы
 import telebot
 import emoji #Смайлики 
 from telebot import types
+import re
 
 # Парсер 
 Main = "https://kaliningrad.bankiros.ru/currency"
@@ -37,18 +38,6 @@ conver_soup_moex_euro_time = soup_current_moex_euro.find_all("span",{"class":"xx
 
 # for i in bank_name.find_all('a'):
 #     print(i.text)
-
-bank_name = soup_current_all.find("table",{"class":"non-standard"})
-def action ():
-    list = []
-    for i in bank_name.find_all('a'):
-        # list = i
-        # print(i.text)
-        list.append(i)
-        print(list[0])
-
-
-action()
 
 
 # Переменный доллар 

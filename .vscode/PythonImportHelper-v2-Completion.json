@@ -61,12 +61,12 @@
         "documentation": {}
     },
     {
-        "label": "actio",
-        "kind": 2,
-        "importPath": "bot",
-        "description": "bot",
-        "peekOfCode": "def action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0])\naction()\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
-        "detail": "bot",
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -227,7 +227,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})",
+        "peekOfCode": "conver_soup_pl = soup_current_all.find_all(\"span\",{\"class\":\"conv-val triger-pln\"})\nconver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар ",
         "detail": "bot",
         "documentation": {}
     },
@@ -236,7 +236,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():",
+        "peekOfCode": "conver_soup_time = soup_current_all.find_all(\"div\",{\"class\":\"actual-currency\"})\nconver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -245,7 +245,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []",
+        "peekOfCode": "conver_soup_moex_usd = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -254,7 +254,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):",
+        "peekOfCode": "conver_soup_moex_usd_time = soup_current_moex_usd.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\nconver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_CB = conver_soup_dollars[2].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -263,7 +263,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i",
+        "peekOfCode": "conver_soup_moex_euro = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-font-size-30 xxx-text-bold\"})\nconver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_CB = conver_soup_dollars[2].text\nUSD_TR = conver_soup_moex_usd[0].text",
         "detail": "bot",
         "documentation": {}
     },
@@ -272,16 +272,7 @@
         "kind": 5,
         "importPath": "bot",
         "description": "bot",
-        "peekOfCode": "conver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\nbank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)",
-        "detail": "bot",
-        "documentation": {}
-    },
-    {
-        "label": "bank_name",
-        "kind": 5,
-        "importPath": "bot",
-        "description": "bot",
-        "peekOfCode": "bank_name = soup_current_all.find(\"table\",{\"class\":\"non-standard\"})\ndef action ():\n    list = []\n    for i in bank_name.find_all('a'):\n        # list = i\n        # print(i.text)\n        list.append(i)\n        print(list[0])\naction()\n# Переменный доллар ",
+        "peekOfCode": "conver_soup_moex_euro_time = soup_current_moex_euro.find_all(\"span\",{\"class\":\"xxx-trading-preview__date xxx-font-size-14 xxx-text-color-darck-gray\"})\n# bank_name = soup_current_all.find(\"td\",{\"class\":\"currency-value\"})\n# for i in bank_name.find_all('a'):\n#     print(i.text)\n# Переменный доллар \nUSD_BUY = conver_soup_dollars[0].text\nUSD_SELL = conver_soup_dollars[1].text\nUSD_CB = conver_soup_dollars[2].text\nUSD_TR = conver_soup_moex_usd[0].text\nUSD_TR_time = conver_soup_moex_usd_time[0].text",
         "detail": "bot",
         "documentation": {}
     },
